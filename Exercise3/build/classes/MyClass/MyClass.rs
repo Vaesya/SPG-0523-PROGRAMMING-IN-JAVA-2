@@ -1,0 +1,2 @@
+MyClass.restoran
+MyClass.drinks
