@@ -5,8 +5,9 @@
 
 import java.awt.event.KeyAdapter; 
 import java.awt.event.KeyEvent;
+import java.awt.event.KeyListener;
 
-public class Calculator extends javax.swing.JFrame {
+public class Calculator extends javax.swing.JFrame implements KeyListener{
 
     //setting the value and variable
     String bt0 = "0";
@@ -28,6 +29,10 @@ public class Calculator extends javax.swing.JFrame {
     
     public Calculator() {//Creates the form called CAlculator
         initComponents();
+        
+        addKeyListener(this);
+        setFocusable(true);
+        setFocusTraversalKeysEnabled(false);
     }
 
     /**
@@ -467,9 +472,91 @@ public class Calculator extends javax.swing.JFrame {
 
     private void equalMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_equalMouseClicked
         // TODO add your handling code here:
-        calculateResult();        
+        calculateResult();     
     }//GEN-LAST:event_equalMouseClicked
+    
+    @Override
+    public void keyPressed(KeyEvent e) {
+        if (e.getKeyChar() == '0') {
+            soalan = Question.getText();
+            Question.setText(soalan + bt0);
+        }
+        if (e.getKeyChar() == '1') {
+            soalan = Question.getText();
+            Question.setText(soalan + bt1);
+        }
+        if (e.getKeyChar() == '2') {
+            soalan = Question.getText();
+            Question.setText(soalan + bt2);
+        }
+        if (e.getKeyChar() == '3') {
+            soalan = Question.getText();
+            Question.setText(soalan + bt3);
+        }
+        if (e.getKeyChar() == '4') {
+            soalan = Question.getText();
+            Question.setText(soalan + bt4);
+        }
+        if (e.getKeyChar() == '5') {
+            soalan = Question.getText();
+            Question.setText(soalan + bt5);
+        }
+        if (e.getKeyChar() == '6') {
+            soalan = Question.getText();
+            Question.setText(soalan + bt6);
+        }
+        if (e.getKeyChar() == '7') {
+            soalan = Question.getText();
+            Question.setText(soalan + bt7);
+        }
+        if (e.getKeyChar() == '8') {
+            soalan = Question.getText();
+            Question.setText(soalan + bt8);
+        }
+        if (e.getKeyChar() == '9') {
+            soalan = Question.getText();
+            Question.setText(soalan + bt9);
+        }
+        
+        if (e.getKeyChar() == '+') {
+            soalan = Question.getText();
+            Question.setText(soalan + btAdd);
+        }
+        if (e.getKeyChar() == '-') {
+            soalan = Question.getText();
+            Question.setText(soalan + btMinus);
+        }
+        if (e.getKeyChar() == '/') {
+            soalan = Question.getText();
+            Question.setText(soalan + btBahagi);
+        }
+        if (e.getKeyChar() == '*') {
+            soalan = Question.getText();
+            Question.setText(soalan + btDarab);
+        }
+        
+        
+        if (e.getKeyChar() == KeyEvent.VK_ESCAPE) {
+            dispose();
+        }
+        if (e.getKeyChar() == KeyEvent.VK_ENTER) {
+            calculateResult(); 
+        }
+        if (e.getKeyChar() == 'c') {
+            Question.setText("");
+        }
+    }
+    
+    @Override
+    public void keyReleased(KeyEvent e) {
+        // Implement if needed
+    }
 
+    @Override
+    public void keyTyped(KeyEvent e) {
+        // Implement if needed
+    }
+    
     /**
      * @param args the command line arguments
      */
@@ -503,36 +590,12 @@ public class Calculator extends javax.swing.JFrame {
                 
                 new Calculator().setVisible(true);                
             }
-        });
-        
-        Calculator Calc = new Calculator();
-        
-        Calc.addKeyListener(new KeyAdapter() {
-            public void keyTyped(KeyEvent e) {
-                Calculator calc = new Calculator();
-          
-                int keyCode = e.getKeyCode();
-      
-                if (keyCode == KeyEvent.VK_0) {
-                    calc.soalan = calc.Question.getText();
-                    calc.Question.setText(calc.soalan + calc.bt0);
-                }
-                else if (keyCode == KeyEvent.VK_1) {
-                    calc.soalan = calc.Question.getText();
-                    calc.Question.setText(calc.soalan + calc.bt1);
-                }
-                else if (keyCode == KeyEvent.VK_2) {
-                    calc.soalan = calc.Question.getText();
-                    calc.Question.setText(calc.soalan + calc.bt2); 
-                }
-                else if (keyCode == KeyEvent.VK_3) {
-                   calc.soalan = calc.Question.getText();
-                   calc.Question.setText(calc.soalan + calc.bt3);
-                }
-            }
-        });
-        
+        });      
     }
+    
+
+    
+    
     
     public void calculateResult(){
         //get the current question string entered
@@ -542,7 +605,7 @@ public class Calculator extends javax.swing.JFrame {
          String[] dahsplit = ayatsoalan.split("[\\+\\-\\*\\/]");
         
         if (dahsplit.length != 2){
-            Question.setText("Error");
+            Question.setText("Error ");
             
         }
         double num1 = Double.parseDouble(dahsplit[0]);
@@ -569,6 +632,7 @@ public class Calculator extends javax.swing.JFrame {
             result = num1 * num2; 
         }
         answer.setText(""+result);
+        Question.setText("");
       
     }
 
